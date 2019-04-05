@@ -2,45 +2,7 @@
 
 @section('css')
 <style>
-    body {
-        padding-top: 100px;
-        background-color: #f1f1f1;
-    }
-
-    h1 {
-        color: #090909;
-        margin-bottom: 30px;
-    }
-
-    form input[type="text"],
-    form input[type="password"] {
-        color: #ffffff;
-        background-color: #2e2e2e;
-        border-radius: 20px;
-        width: 50%;
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    form input[type="text"]:focus ,
-    form input[type="password"]:focus  {
-        color: #ffffff;
-        background-color: #2e2e2e;
-        border: none;
-    }
-
-    .img-profile {
-        margin-bottom: 30px;
-    }
-
-    .img-profile .circle {
-        width: 100px;
-        height: 100px;
-        background-color: transparent;
-        border: solid #090909 3px;
-        border-radius: 100%;
-        display: inline-block;
-    }
+    
 
     form button[type="submit"] {
         border-radius: 20px;
@@ -55,25 +17,15 @@
         color: #fff;
     }
 
-    p.have-account a {
-        text-decoration: none;
-        color: #090909;
-        font-weight: bold;
-    }
-
-    p.have-account a:hover {
-        color: #00CE60;
-    }
-
-    #footer {}
+    
 
 </style>
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container-fluid cont-login">
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-6 left-side">
 
             <h1 class="text-center">Login</h1>
             <div class="img-profile text-center">
@@ -117,12 +69,17 @@
                         </button>
                     </div>
                 </div>
+            </form>
+            <p class="have-account text-center">Belum punya akun? <a href="{{url('/register')}}">Daftar</a></p>
+            <div class="the-footer">
+                <p class="text-center">2019 Kreaktif. Hak Cipta Dilindungi</p>
+            </div>
         </div>
-        </form>
-        <p class="have-account">Belum punya akun? <a href="{{url('/register')}}">Daftar</a></p>
-
-        <div id="">
-            <p>2019 Kreaktif, Hak Cipta Terlindungi</p>
+        <div class="col-md-6 right-side d-sm-none d-md-block">
+            <div class="bar bar-1"></div>
+            <div class="bar bar-2"></div>
+            <div class="bar bar-3"></div>
+            <div class="bar bar-4"></div>
         </div>
     </div>
 </div>
