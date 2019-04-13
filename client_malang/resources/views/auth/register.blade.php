@@ -4,9 +4,9 @@
 <style>
     body {
         padding-top: 100px;
-        background-color: #f1f1f1; 
+        background-color: #f1f1f1;
     }
-    
+
     h1 {
         padding-bottom: 30px;
     }
@@ -14,7 +14,7 @@
     .cont-register form input {
         background-color: transparent;
         color: #090909;
-        width: 50%;
+        width: 50%;name
         border: solid #090909 1.5px;
         border-radius: 20px;
         margin-right: auto;
@@ -40,7 +40,7 @@
         font-weight: bold;
     }
 
-</style> 
+</style>
 
 @endsection
 
@@ -57,13 +57,13 @@
 
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="Email" required>
+                                <input id="name" type="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Name" required>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" placeholder="Username" required autofocus>
+                                <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" placeholder="Username" required autofocus>
                             </div>
                         </div>
 
@@ -75,7 +75,7 @@
 
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Re-Password" required>
+                                <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" placeholder="Re-Password" required>
                             </div>
                         </div>
 

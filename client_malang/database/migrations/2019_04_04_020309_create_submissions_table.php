@@ -15,11 +15,11 @@ class CreateSubmissionsTable extends Migration
     {
         Schema::create('submissions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('user_id');
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->integer('total_points');
-            $table->date('start_at');
-            $table->date('submit_at');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
