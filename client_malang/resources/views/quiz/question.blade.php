@@ -67,6 +67,10 @@
 </style>
 @endsection
 
+@section('navbar')
+    @extends('layouts.navbar')
+@endsection
+
 @section('content')
 <div class="container cont-question">
     <div class="row justify-content-center">

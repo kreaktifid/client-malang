@@ -48,6 +48,7 @@
                 </div>
             </div>
         </div> --}}
+        @yield('navbar')
         <div id="app">
             @yield('content')
         </div>

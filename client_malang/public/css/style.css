@@ -206,3 +206,15 @@ form button[type="submit"] {
 .cont-question {
     padding-top: 50px;
 }
+
+.cont-question input[type="radio"] {
+    height: 0px;
+    width: 0px;
+    display: inline;
+    float: none !important;
+    margin-top: 3px;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: 1;
+}
