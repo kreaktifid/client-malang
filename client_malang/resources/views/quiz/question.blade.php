@@ -63,6 +63,10 @@
         margin-top: 20px;
         float: right;
     }
+    .btn.btn-prev {
+        margin-top: 20px;
+        float: left;
+    }
 
 </style>
 @endsection
@@ -86,13 +90,13 @@
                         <?php
                             $q_num = 1;
                         ?>
-                        @for ($i = 0; $i < count($questions); $i++) 
+                        @for ($i = 0; $i <count($questions); $i++) 
                             <?php
                                 $default_class = 'not-visited';
-                                if(isset($cState) && $cState) {
-                                    if(array_key_exists($question[$i]->id, $cState))
-                                        $default_class = 'answered';
-                                }
+                                // if(isset($cState) && $cState) {
+                                //     if(array_key_exists($question[$i]->id, $cState))
+                                //         $default_class = 'answered';
+                                // }
                             ?> 
                             <li class="pal pal-el {{$default_class}}" onclick="showSpecificQuestion({{$i}});">
                                 <span>{{$q_num}}</span>
@@ -103,7 +107,8 @@
                         @endfor
 
                     </ul>
-                    <button class="btn btn-success btn-next">Selanjutnya <i class="fa fa-chevron-right"></i></button>
+                    <button class="btn btn-warning btn-prev" onclick="prevClick()">Sebelumnya <i class="fa fa-chevron-left"></i></button>
+                    <button class="btn btn-success btn-next" onclick="nextClick()">Selanjutnya <i class="fa fa-chevron-right"></i></button>
                 </div>
             </div>
         </div>
@@ -112,18 +117,21 @@
             <form action="">
                 @for ($j = 0; $j<count($questions); $j++)
 
-                <div class="card" id="question-list">
-                    <div class="card-header">
-                        {{$j+1}}
-                    </div>
-                    <div class="card-body question-div">
-                        <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option1']}} <br />
-                        <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option2']}} <br />
-                        <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option3']}} <br />
-                        <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option4']}} <br />
+                <div id="question-list">
+                    <div class="card" class="question-div" name="question[{{$questions[$j]['id']}}]">
+                        <div class="card-header">
+                            {{$j+1}}
+                        </div>
+                        <div class="card-body">
+                            <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option1']}} <br />
+                            <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option2']}} <br />
+                            <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option3']}} <br />
+                            <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option4']}} <br />
+                        </div>
                     </div>
                 </div>
                 @endfor
+                <button type="submit" class="btn btn-primary btn-submit">Submit</button>
             </form>
 
 
@@ -132,24 +140,54 @@
 </div>
 
 <script>
-    var VISIBLE_ELEMENT = "#question-list .question-div:visible";
+    var VISIBLE_ELEMENT = $("#question-list .question-div:visible");
+    var ANSWERED        = ' answered';
+    var NOT_ANSWERED    = ' not-answered';
+    var ANSWER_MARKED   = ' marked';
+    var NOT_VISITED     = ' not-visited';        
 
-    function nextClick(argument) {
-        is_marked = 0;
-        if(argument == 'markbtn') {
-            is_marked = 1;
-        }
-        processNext(is_marked);
-        $(VISIBLE_ELEMENT).next('div').fadeIn(DURATION).prev().hide();
+    $(document).ready(function() {
+        $("#question-list .card").slice(0,10).show();
+        $("li.pal.pal-el span").slice(0,10).css("background-color", "green");
+        
 
-        // doGeneralOperations();
+        $("#question-list .card").slice(10,20).hide();
+        $("li.pal.pal-el span").slice(11,20).css("background-color", "white");
 
-        return false;
+        $("button.btn-prev").hide();
+        $("button.btn-submit").hide();
+
+        console.log("Hello");
+    });
+
+    function nextClick() {
+        $("#question-list .card").slice(0,10).hide();
+        $("li.pal.pal-el span").slice(0,10).css("background-color", "white");
+
+        $("#question-list .card").slice(10,20).show();
+        $("li.pal.pal-el span").slice(10,20).css("background-color", "green");
+    
+        $("button.btn-prev").show();
+        $("button.btn-next").hide();
+        $("button.btn-submit").show();
+    }
+
+    function prevClick() {
+        $("#question-list .card").slice(0,10).show();
+        $("li.pal.pal-el span").slice(0,10).css("background-color", "green");
+        
+
+        $("#question-list .card").slice(10,20).hide();
+        $("li.pal.pal-el span").slice(10,20).css("background-color", "white");
+
+        $("button.btn-prev").hide();
+        $("button.btn-next").show();
+        $("button.btn-submit").hide();
     }
 
     function showSpecificQuestion(index) {
         $(VISIBLE_ELEMENT).hide();
-        $("question-list .question-dic:eq(" + index + ")").fadeIn();
+        $("#question-list .question-div:eq("+index+")").fadeIn();
 
         return false;
     }
