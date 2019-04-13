@@ -198,3 +198,11 @@ form button[type="submit"] {
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
+
+
+/*=========
+    QUESTION
+===========*/
+.cont-question {
+    padding-top: 50px;
+}

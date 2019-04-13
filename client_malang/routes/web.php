@@ -18,9 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/question', function() {
-    return view('quiz.question');
-});
+Route::get('/question', 'QuizController@startQuiz');
 
 Route::get('/result', function() {
     return view('quiz.result');
