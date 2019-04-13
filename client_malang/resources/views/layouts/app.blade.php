@@ -29,6 +29,10 @@
                 background-color:#ededed;
             }
         </style>
+        <script
+			  src="https://code.jquery.com/jquery-3.4.0.min.js"
+			  integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg="
+			  crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <script type="text/javascript">
             document.documentElement.className = document.documentElement.className.replace('no-js', 'js') +

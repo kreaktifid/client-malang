@@ -30,7 +30,7 @@ class QuizController extends Controller
         $data['active_class'] = 'tryout';
         $data['current_state'] = $current_state;
         $data['current_question_id'] = $current_question_id;
-        $data['questions'] = $question;
+        $data['questions'] = $question->toArray();
 
         return view('quiz.question', $data);
     }

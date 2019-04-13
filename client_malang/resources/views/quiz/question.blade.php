@@ -83,16 +83,24 @@
                 </div>
                 <div class="card-body">
                     <ul class="question-pal" id="pal-list">
-                        @for ($i = 0; $i < count($questions); $i++) <?php
+                        <?php
+                            $q_num = 1;
+                        ?>
+                        @for ($i = 0; $i < count($questions); $i++) 
+                            <?php
                                 $default_class = 'not-visited';
                                 if(isset($cState) && $cState) {
                                     if(array_key_exists($question[$i]->id, $cState))
                                         $default_class = 'answered';
                                 }
-                            ?> <li class="pal pal-el {{$default_class}}" onclick="showSpecificQuestion({{$i}});">
-                            <span>{{$i+1}}</span>
+                            ?> 
+                            <li class="pal pal-el {{$default_class}}" onclick="showSpecificQuestion({{$i}});">
+                                <span>{{$q_num}}</span>
                             </li>
-                            @endfor
+                            <?php 
+                                $q_num++;
+                            ?>
+                        @endfor
 
                     </ul>
                     <button class="btn btn-success btn-next">Selanjutnya <i class="fa fa-chevron-right"></i></button>
@@ -102,20 +110,20 @@
         <div class="col-md-8">
             <h1>Soal</h1>
             <form action="">
-                @foreach ($questions as $q)
+                @for ($j = 0; $j<count($questions); $j++)
 
                 <div class="card" id="question-list">
                     <div class="card-header">
-                        {{$q->id}}
+                        {{$j+1}}
                     </div>
                     <div class="card-body question-div">
-                        <input type="radio" name="{{$q->id}}" id=""> {{$q->option1}} <br />
-                        <input type="radio" name="{{$q->id}}" id=""> {{$q->option2}} <br />
-                        <input type="radio" name="{{$q->id}}" id=""> {{$q->option3}} <br />
-                        <input type="radio" name="{{$q->id}}" id=""> {{$q->option4}} <br />
+                        <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option1']}} <br />
+                        <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option2']}} <br />
+                        <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option3']}} <br />
+                        <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option4']}} <br />
                     </div>
                 </div>
-                @endforeach
+                @endfor
             </form>
 
 
@@ -125,6 +133,19 @@
 
 <script>
     var VISIBLE_ELEMENT = "#question-list .question-div:visible";
+
+    function nextClick(argument) {
+        is_marked = 0;
+        if(argument == 'markbtn') {
+            is_marked = 1;
+        }
+        processNext(is_marked);
+        $(VISIBLE_ELEMENT).next('div').fadeIn(DURATION).prev().hide();
+
+        // doGeneralOperations();
+
+        return false;
+    }
 
     function showSpecificQuestion(index) {
         $(VISIBLE_ELEMENT).hide();
