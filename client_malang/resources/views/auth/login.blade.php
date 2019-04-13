@@ -1,56 +1,86 @@
 @extends('layouts.app')
 
+@section('css')
+<style>
+    
+
+    form button[type="submit"] {
+        border-radius: 20px;
+        width: 20%;
+        margin-right: auto;
+        margin-left: auto;
+        display: block;
+    }
+
+    .btn-login {
+        background-color: #00CE60;
+        color: #fff;
+    }
+
+    
+
+</style>
+@endsection
+
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-            <div class="card bg-white border">
-                {{-- <div class="card-header bg-transparent border-0">{{ __('Login') }}</div> --}}
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}" arialabel="{{ __('Login') }}">
-                        @csrf
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <label for="username" class="col-sm-12 col-form-label pl-0">{{ __('Username') }}</label>
-                                <br>
-                                <input id="username" type="username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
-                                @if ($errors->has('username'))
-                                <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('username') }}</strong></span>
-                                @endif
-                            </div>
-                        </div>
+<div class="container-fluid cont-login">
+    <div class="row justify-content-center">
+        <div class="col-md-6 left-side">
 
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <label for="password" class="col-md-4 col-form-label text-md-left pl-0">{{ __('Password') }}</label>
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-                                @if ($errors->has('password'))
-                                <span class="invalid-feedback" role="alert"><strong>{{ $errors->first('password') }}</strong></span>
-                                @endif
-                            </div>
-                        </div>
+            <h1 class="text-center">Login</h1>
+            <div class="img-profile text-center">
+                <span class="circle"></span>
+            </div>
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
 
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <div class="checkbox">
-                                    <input type="checkbox" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}> <label for="remember">{{ __('Remember Me') }}</label>
-                                </div>
-                            </div>
-                        </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <input id="username" type="text"
+                            class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username"
+                            value="{{ old('username') }}" placeholder="Username" required autofocus>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-12">
-                                <button type="submit" class="btn-block btn" style="background-color:#bd1544;color:#fff;">{{ __('Login') }}</button>
-                                <br>
-                                <a class="btn btn-link pl-0" href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
-                            </div>
-                        </div>
-                    </form>
+                        @if ($errors->has('username'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('username') }}</strong>
+                        </span>
+                        @endif
+                    </div>
                 </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <input id="password" type="password"
+                            class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password"
+                            placeholder="Password" required>
+
+                        @if ($errors->has('password'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-login text-center">
+                            Login
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <p class="have-account text-center">Belum punya akun? <a href="{{url('/register')}}">Daftar</a></p>
+            <div class="the-footer">
+                <p class="text-center">2019 Kreaktif. Hak Cipta Dilindungi</p>
             </div>
         </div>
-        <div class="col-md-4"></div>
+        <div class="col-md-6 right-side d-sm-none d-md-block">
+            <div class="bar bar-1"></div>
+            <div class="bar bar-2"></div>
+            <div class="bar bar-3"></div>
+            <div class="bar bar-4"></div>
+        </div>
     </div>
 </div>
 @endsection

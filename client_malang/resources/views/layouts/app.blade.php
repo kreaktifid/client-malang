@@ -29,13 +29,14 @@
                 background-color:#ededed;
             }
         </style>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <script type="text/javascript">
             document.documentElement.className = document.documentElement.className.replace('no-js', 'js') +
             (document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1") ? ' svg' : ' no-svg');
         </script>
     </head>
     <body>
-        <nav class="navbar navbar-expand p-0 nav">
+        {{-- <nav class="navbar navbar-expand p-0 nav">
             <a class="navbar-brand text-center col-xs-12 col-md-3 col-lg-2 mr-0" href="{{route('home')}}" style="color:#000;font-weight:700;"> EKSPOSISI </a>
             <button class="btn btn-link d-block d-md-none" data-toggle="collapse" data-target="#sidebar-nav" role="button" ><span class="oi oi-menu"></span></button>
         </nav>
@@ -45,10 +46,14 @@
                     @yield("content")
                 </div>
             </div>
+        </div> --}}
+        <div id="app">
+            @yield('content')
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
     </body>
+
 </html>

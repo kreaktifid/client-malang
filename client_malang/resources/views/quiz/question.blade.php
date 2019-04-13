@@ -67,7 +67,7 @@
 @endsection
 
 @section('content')
-    <div class="container">
+    <div class="container cont-question">
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <p>Petunjuk: Tekan <i>icon</i> untuk mendengarkan cerita soal</p>
@@ -78,8 +78,15 @@
                     </div>
                     <div class="card-body">
                         <ul class="question-pal" id="pal-list">
-                            @for ($i = 0; $i < 20; $i++)
-                                <li class="pal pal-el">
+                            @for ($i = 0; $i < count($questions); $i++)
+                            <?php
+                                $default_class = 'not-visited';
+                                if(isset($cState) && $cState) {
+                                    if(array_key_exists($question[$i]->id, $cState))
+                                        $default_class = 'answered';
+                                }
+                            ?>
+                                <li class="pal pal-el {{$default_class}}" onclick="showSpecificQuestion({{$i}});">
                                     <span>{{$i+1}}</span>
                                 </li>
                             @endfor
@@ -91,78 +98,36 @@
             </div>
             <div class="col-md-8">
                 <h1>Soal</h1>
-                
-                <div class="card">
+                @foreach ($questions as $q)
+                    
+                <div class="card" id="question-list">
                     <div class="card-header">
-                        Soal 1
+                        {{$q->id}}
                     </div>
-                    <div class="card-body">
+                    <div class="card-body question-div">
                         <form action="">
-                            <input type="radio" name="" id=""> Pilihan A <br>
-                            <input type="radio" name="" id=""> Pilihan B <br>
-                            <input type="radio" name="" id=""> Pilihan C <br>
-                            <input type="radio" name="" id=""> Pilihan D <br>
+                            <input type="radio" name="{{$q->id}}" id=""> {{$q->option1}} <br>
+                            <input type="radio" name="{{$q->id}}" id=""> {{$q->option2}} <br>
+                            <input type="radio" name="{{$q->id}}" id=""> {{$q->option3}} <br>
+                            <input type="radio" name="{{$q->id}}" id=""> {{$q->option4}} <br>
                         </form>
                     </div>
                 </div>
+                @endforeach
 
-                <div class="card">
-                    <div class="card-header">
-                        Soal 1
-                    </div>
-                    <div class="card-body">
-                        <form action="">
-                            <input type="radio" name="" id=""> Pilihan A <br>
-                            <input type="radio" name="" id=""> Pilihan B <br>
-                            <input type="radio" name="" id=""> Pilihan C <br>
-                            <input type="radio" name="" id=""> Pilihan D <br>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        Soal 1
-                    </div>
-                    <div class="card-body">
-                        <form action="">
-                            <input type="radio" name="" id=""> Pilihan A <br>
-                            <input type="radio" name="" id=""> Pilihan B <br>
-                            <input type="radio" name="" id=""> Pilihan C <br>
-                            <input type="radio" name="" id=""> Pilihan D <br>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        Soal 1
-                    </div>
-                    <div class="card-body">
-                        <form action="">
-                            <input type="radio" name="" id=""> Pilihan A <br>
-                            <input type="radio" name="" id=""> Pilihan B <br>
-                            <input type="radio" name="" id=""> Pilihan C <br>
-                            <input type="radio" name="" id=""> Pilihan D <br>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        Soal 1
-                    </div>
-                    <div class="card-body">
-                        <form action="">
-                            <input type="radio" name="" id=""> Pilihan A <br>
-                            <input type="radio" name="" id=""> Pilihan B <br>
-                            <input type="radio" name="" id=""> Pilihan C <br>
-                            <input type="radio" name="" id=""> Pilihan D <br>
-                        </form>
-                    </div>
-                </div>
                 
             </div>
         </div>
     </div>
+
+    <script>
+        var VISIBLE_ELEMENT = "#question-list .question-div:visible";
+
+        function showSpecificQuestion(index) {
+            $(VISIBLE_ELEMENT).hide();
+            $("question-list .question-dic:eq("+index+")").fadeIn();
+
+            return false;
+        }
+    </script>
 @endsection

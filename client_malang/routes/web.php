@@ -19,10 +19,7 @@ Route::resource('submissions', 'SubmissionController');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::get('/edit-profile', 'ProfileController@edit')->name('profile.edit');
 
-
-Route::get('/question', function() {
-    return view('quiz.question');
-})->name('quiz.question');;
+Route::get('/question', 'QuizController@startQuiz');
 
 Route::get('/result', function() {
     return view('quiz.result');
