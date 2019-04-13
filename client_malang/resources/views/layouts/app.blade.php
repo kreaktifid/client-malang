@@ -34,6 +34,7 @@
             document.documentElement.className = document.documentElement.className.replace('no-js', 'js') +
             (document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1") ? ' svg' : ' no-svg');
         </script>
+        @yield('css')
     </head>
     <body>
         {{-- <nav class="navbar navbar-expand p-0 nav">
