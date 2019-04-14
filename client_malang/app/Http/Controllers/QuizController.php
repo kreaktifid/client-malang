@@ -23,10 +23,10 @@ class QuizController extends Controller
         $user = Auth::user();
 
         //Create Submission
-        // $submission = new Submission();
-        // $submission->user_id = $user->id;
-        // $submission->status = "PROGRESS";
-        // $submission->save();
+        $submission = new Submission();
+        $submission->user_id = $user->id;
+        $submission->status = "PROGRESS";
+        $submission->save();
 
         // dd($submission);
 
