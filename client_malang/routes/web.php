@@ -24,3 +24,5 @@ Route::get('/question', 'QuizController@startQuiz');
 Route::get('/result', function() {
     return view('quiz.result');
 });
+
+Route::post('/question', 'QuizController@submitQuiz');

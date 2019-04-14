@@ -72,14 +72,17 @@
 @endsection
 
 @section('navbar')
-    @extends('layouts.navbar')
+    @extends('layouts.timer')
+
 @endsection
 
 @section('content')
 <div class="container cont-question">
     <div class="row justify-content-center">
+        
         <div class="col-md-4">
             <p>Petunjuk: Tekan <i>icon</i> untuk mendengarkan cerita soal</p>
+            
 
             <div class="card">
                 <div class="card-header">
@@ -114,7 +117,8 @@
         </div>
         <div class="col-md-8">
             <h1>Soal</h1>
-            <form action="">
+            <form action="{{action('QuizController@submitQuiz')}}" method="POST" id="quizform">
+                @csrf
                 @for ($j = 0; $j<count($questions); $j++)
 
                 <div id="question-list">
@@ -123,10 +127,10 @@
                             {{$j+1}}
                         </div>
                         <div class="card-body">
-                            <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option1']}} <br />
-                            <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option2']}} <br />
-                            <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option3']}} <br />
-                            <input type="radio" name="{{$questions[$j]['id']}}" id=""> {{$questions[$j]['option4']}} <br />
+                            <input type="radio" name="{{$questions[$j]['id']}}" id="" value="option1" onclick="setColorPalette({{$j}})"> {{$questions[$j]['option1']}} <br />
+                            <input type="radio" name="{{$questions[$j]['id']}}" id="" value="option2" onclick="setColorPalette({{$j}})"> {{$questions[$j]['option2']}} <br />
+                            <input type="radio" name="{{$questions[$j]['id']}}" id="" value="option3" onclick="setColorPalette({{$j}})"> {{$questions[$j]['option3']}} <br />
+                            <input type="radio" name="{{$questions[$j]['id']}}" id="" value="option4" onclick="setColorPalette({{$j}})"> {{$questions[$j]['option4']}} <br />
                         </div>
                     </div>
                 </div>
@@ -145,27 +149,36 @@
     var NOT_ANSWERED    = ' not-answered';
     var ANSWER_MARKED   = ' marked';
     var NOT_VISITED     = ' not-visited';        
+    var MINUTES         = 0;
+    var SECONDS         = 0;
+    var MAX_SECONDS     = 5;
+    var CALL_TIME       = 0;
 
     $(document).ready(function() {
         $("#question-list .card").slice(0,10).show();
-        $("li.pal.pal-el span").slice(0,10).css("background-color", "green");
+        // $("li.pal.pal-el span").slice(0,10).css("background-color", "green");
         
 
         $("#question-list .card").slice(10,20).hide();
-        $("li.pal.pal-el span").slice(11,20).css("background-color", "white");
+        // $("li.pal.pal-el span").slice(11,20).css("background-color", "white");
 
         $("button.btn-prev").hide();
         $("button.btn-submit").hide();
+
+        mins = {{$menit}}
+        seconds = {{$detik}}
+
+        initWaktu(mins, seconds);
 
         console.log("Hello");
     });
 
     function nextClick() {
         $("#question-list .card").slice(0,10).hide();
-        $("li.pal.pal-el span").slice(0,10).css("background-color", "white");
+        // $("li.pal.pal-el span").slice(0,10).css("background-color", "white");
 
         $("#question-list .card").slice(10,20).show();
-        $("li.pal.pal-el span").slice(10,20).css("background-color", "green");
+        // $("li.pal.pal-el span").slice(10,20).css("background-color", "green");
     
         $("button.btn-prev").show();
         $("button.btn-next").hide();
@@ -174,11 +187,11 @@
 
     function prevClick() {
         $("#question-list .card").slice(0,10).show();
-        $("li.pal.pal-el span").slice(0,10).css("background-color", "green");
+        // $("li.pal.pal-el span").slice(0,10).css("background-color", "green");
         
 
         $("#question-list .card").slice(10,20).hide();
-        $("li.pal.pal-el span").slice(10,20).css("background-color", "white");
+        // $("li.pal.pal-el span").slice(10,20).css("background-color", "white");
 
         $("button.btn-prev").hide();
         $("button.btn-next").show();
@@ -191,6 +204,59 @@
 
         return false;
     }
+
+    function setColorPalette(index) {
+        $("li.pal.pal-el span").slice(index, index+1).css("background-color", "yellow");
+        // console.log('index :', index);
+    }
+
+    function initWaktu(mins, sec) {
+        MINUTES = mins;
+        SECONDS = sec;
+
+        startInterval();
+
+    }
+
+    function startInterval() {
+        timer = setInterval("tictac()", 1000);
+    }
+
+    function stopInterval() {
+        clearInterval(timer);
+    }
+
+    function checkTimer() {
+        if(MAX_SECONDS == CALL_TIME) {
+            CALL_TIME = 0;
+        }
+        else
+            CALL_TIME++;
+    }
+
+    function tictac() {
+        SECONDS--;
+        checkTimer();
+        if(SECONDS <= 0) {
+            MINUTES--;
+            $("#mins").text(MINUTES);
+
+            if(MINUTES < 0) {
+                stopInterval();
+                $("#mins").text('0');
+                alert("Waktu telah habis. Jawaban akan tersubmit secara otomatis.");
+                $('#quizform').submit();
+            }
+            SECONDS = 59;
+        }
+
+        if(MINUTES >= 0) {
+            $("#seconds").text(SECONDS);
+        } else {
+            $("#seconds").text("00");
+        }
+    }
+
 
 </script>
 @endsection

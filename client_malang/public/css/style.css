@@ -218,3 +218,16 @@ form button[type="submit"] {
     box-shadow: none;
     opacity: 1;
 }
+
+.cont-question h3.time {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 3px 3px rgba(0,0,0,0.1);
+}
+
+#timerdiv {
+    background-color: #c90627;
+    color: #fff;
+    height: 100%;
+}
