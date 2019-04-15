@@ -1,0 +1,233 @@
+.cont-login .left-side {
+    position: relative;
+    padding-top: 50px;
+    margin: 0!important;
+    height: 100vh;
+    background: linear-gradient(0deg, #00bac1, #0092c8)
+}
+
+.cont-login .left-side form input[type="text"],
+.cont-login .left-side form input[type="password"] {
+    color: #ffffff;
+    background-color: transparent;
+    border-radius: 20px;
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.cont-login .left-side form input[type="text"]:focus,
+.cont-login .left-side form input[type="password"]:focus {
+    color: #ffffff;
+    background-color: transparent;
+    border: none;
+}
+
+.cont-login .left-side h1 {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.cont-login .left-side .img-profile {
+    margin-bottom: 20px;
+}
+
+.cont-login .left-side .img-profile .circle {
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    border: solid #ffffff 3px;
+    border-radius: 100%;
+    display: inline-block;
+}
+
+.cont-login p.have-account {
+    color: #ffffff;
+}
+
+.cont-login p.have-account a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.cont-login p.have-account a:hover {
+    color: #1a1a11;
+}
+
+.cont-login .the-footer {
+    color: #ffffff;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+.right-side .bar {
+    width: 60px;
+    height: 75%;
+    position: absolute;
+    
+}
+
+.right-side .bar-1 {
+    background-color: #008fce;
+    left: 20%;
+}
+.right-side .bar-2 {
+    background-color: #00ce60;
+    left: 35%;
+    bottom: 0;
+}
+.right-side .bar-3 {
+    background-color: #58d18c;
+    left: 50%;
+}
+.right-side .bar-4 {
+    background-color: #03749c;
+    left: 65%;
+    bottom: 0;
+}
+
+form button[type="submit"] {
+    border-radius: 20px;
+    width: 20%;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+.btn-login {
+    background-color: #00CE60;
+    color: #fff;
+}
+
+
+/*
+    REGISTER
+*/
+.cont-register .left-side {
+    position: relative;
+    padding-top: 50px;
+    margin: 0 !important;
+    height: 100vh;
+    background: linear-gradient(0deg, #00bac1, #0092c8)
+}
+
+.cont-register .left-side form input[type="text"],
+.cont-register .left-side form input[type="password"],
+.cont-register .left-side form input[type="email"] {
+    color: #ffffff;
+    background-color: transparent;
+    border-radius: 20px;
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.cont-register .left-side form input[type="text"]:focus,
+.cont-register .left-side form input[type="password"]:focus,
+.cont-register .left-side form input[type="email"]:focus {
+    color: #ffffff;
+    background-color: transparent;
+    border: none;
+}
+
+.cont-register .left-side h1 {
+    color: #ffffff;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+.cont-register .the-footer {
+    color: #ffffff;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: #fff;
+}
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: #fff;
+    opacity: 1;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: #fff;
+    opacity: 1;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #fff;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #fff;
+}
+
+::placeholder {
+    /* Most modern browsers support this now. */
+    color: #fff;
+}
+
+
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(90deg,#00bac1, #0092c8);
+}
+
+#footer p {
+    color: #ffffff;
+    margin-left: auto;
+    margin-top: auto;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+
+/*=========
+    QUESTION
+===========*/
+.cont-question {
+    padding-top: 50px;
+}
+
+.cont-question input[type="radio"] {
+    height: 0px;
+    width: 0px;
+    display: inline;
+    float: none !important;
+    margin-top: 3px;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    opacity: 1;
+}
+
+.cont-question h3.time {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 3px 3px rgba(0,0,0,0.1);
+}
+
+#timerdiv {
+    background-color: #c90627;
+    color: #fff;
+    height: 100%;
+}
