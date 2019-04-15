@@ -34,11 +34,12 @@
         <div class="col-md-12 text-center">
             <h1>Hasil Ujian Anda</h1>
             <div class="result">
-                <h3><span>50/100</span></h3>
+                <h3><span>{{$point}}/100</span></h3>
             </div>
             <a href="" class="btn btn-success">Kembali</a>
         </div>
     </div>
 </div>
     
+@include('layouts.footer')
 @endsection

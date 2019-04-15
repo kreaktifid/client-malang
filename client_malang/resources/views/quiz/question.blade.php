@@ -1,168 +1,262 @@
 @extends('layouts.app')
 
 @section('css')
-    <style>
-        .card {
-            margin-bottom: 20px;
-            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-            background-color: #ffffff;
-            border-radius: 20px;
-        }
+<style>
+    .card {
+        margin-bottom: 20px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+        background-color: #ffffff;
+        border-radius: 20px;
+    }
 
-        .card .card-header {
-            background-color: #ffffff;
-            /* border: transparent; */
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            margin-bottom: 0px;
-        }
+    .card .card-header {
+        background-color: #ffffff;
+        /* border: transparent; */
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        margin-bottom: 0px;
+    }
 
-        .card .card-body input[type="radio"] {
-            margin-bottom: 10px;
-        }
+    .card .card-body input[type="radio"] {
+        margin-bottom: 10px;
+    }
 
-        .circle {
-            width: 30px;
-            height: 30px;
-            border-radius: 100%;
-            border: solid #000000;
-        }
+    .circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        border: solid #000000;
+    }
 
-        ul.question-pal {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            /* margin: 0 -4px; */
-            max-height: 400px;
-            overflow-y: scroll;
-            overflow: auto;
-            
-        }
+    ul.question-pal {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        /* margin: 0 -4px; */
+        max-height: 400px;
+        overflow-y: scroll;
+        overflow: auto;
 
-        ul.question-pal li {
-            display: inline-block;
-            margin: 0 3px 3px;
-            /* box-shadow: 0px 0px 2px 0.00px rgba(0, 0, 0, 0.2); */
-            
-        }
+    }
 
-        ul.question-pal li span {
-            float: left;
-            width: 20px;
-            height: 20px;
-            line-height: 20px;
-            text-align: center;
-            background-color: #ffffff;
-            color: #000000;
-            border: solid 1px #000000;
-            font-size: 12px;
-            border-radius: 100%;
-        }
+    ul.question-pal li {
+        display: inline-block;
+        margin: 0 3px 3px;
+        /* box-shadow: 0px 0px 2px 0.00px rgba(0, 0, 0, 0.2); */
 
-        .btn.btn-next {
-            margin-top: 20px;
-            float: right;
-        }
-    </style>
+    }
+
+    ul.question-pal li span {
+        float: left;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        text-align: center;
+        background-color: #ffffff;
+        color: #000000;
+        border: solid 1px #000000;
+        font-size: 12px;
+        border-radius: 100%;
+    }
+
+    .btn.btn-next {
+        margin-top: 20px;
+        float: right;
+    }
+    .btn.btn-prev {
+        margin-top: 20px;
+        float: left;
+    }
+
+</style>
+@endsection
+
+@section('navbar')
+    @extends('layouts.timer')
+
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <p>Petunjuk: Tekan <i>icon</i> untuk mendengarkan cerita soal</p>
+<div class="container cont-question">
+    <div class="row justify-content-center">
+        
+        <div class="col-md-4">
+            <p>Petunjuk: Tekan <i>icon</i> untuk mendengarkan cerita soal</p>
+            
 
-                <div class="card">
-                    <div class="card-header">
-                        <p>Urutan Soal</p>
-                    </div>
-                    <div class="card-body">
-                        <ul class="question-pal" id="pal-list">
-                            @for ($i = 0; $i < 20; $i++)
-                                <li class="pal pal-el">
-                                    <span>{{$i+1}}</span>
-                                </li>
-                            @endfor
-                            
-                        </ul>
-                        <button class="btn btn-success btn-next">Selanjutnya <i class="fa fa-chevron-right"></i></button>
-                    </div>
+            <div class="card">
+                <div class="card-header">
+                    <p>Urutan Soal</p>
                 </div>
-            </div>
-            <div class="col-md-8">
-                <h1>Soal</h1>
-                
-                <div class="card">
-                    <div class="card-header">
-                        Soal 1
-                    </div>
-                    <div class="card-body">
-                        <form action="">
-                            <input type="radio" name="" id=""> Pilihan A <br>
-                            <input type="radio" name="" id=""> Pilihan B <br>
-                            <input type="radio" name="" id=""> Pilihan C <br>
-                            <input type="radio" name="" id=""> Pilihan D <br>
-                        </form>
-                    </div>
-                </div>
+                <div class="card-body">
+                    <ul class="question-pal" id="pal-list">
+                        <?php
+                            $q_num = 1;
+                        ?>
+                        @for ($i = 0; $i <count($questions); $i++) 
+                            <?php
+                                $default_class = 'not-visited';
+                                // if(isset($cState) && $cState) {
+                                //     if(array_key_exists($question[$i]->id, $cState))
+                                //         $default_class = 'answered';
+                                // }
+                            ?> 
+                            <li class="pal pal-el {{$default_class}}" onclick="showSpecificQuestion({{$i}});">
+                                <span>{{$q_num}}</span>
+                            </li>
+                            <?php 
+                                $q_num++;
+                            ?>
+                        @endfor
 
-                <div class="card">
-                    <div class="card-header">
-                        Soal 1
-                    </div>
-                    <div class="card-body">
-                        <form action="">
-                            <input type="radio" name="" id=""> Pilihan A <br>
-                            <input type="radio" name="" id=""> Pilihan B <br>
-                            <input type="radio" name="" id=""> Pilihan C <br>
-                            <input type="radio" name="" id=""> Pilihan D <br>
-                        </form>
-                    </div>
+                    </ul>
+                    <button class="btn btn-warning btn-prev" onclick="prevClick()">Sebelumnya <i class="fa fa-chevron-left"></i></button>
+                    <button class="btn btn-success btn-next" onclick="nextClick()">Selanjutnya <i class="fa fa-chevron-right"></i></button>
                 </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        Soal 1
-                    </div>
-                    <div class="card-body">
-                        <form action="">
-                            <input type="radio" name="" id=""> Pilihan A <br>
-                            <input type="radio" name="" id=""> Pilihan B <br>
-                            <input type="radio" name="" id=""> Pilihan C <br>
-                            <input type="radio" name="" id=""> Pilihan D <br>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        Soal 1
-                    </div>
-                    <div class="card-body">
-                        <form action="">
-                            <input type="radio" name="" id=""> Pilihan A <br>
-                            <input type="radio" name="" id=""> Pilihan B <br>
-                            <input type="radio" name="" id=""> Pilihan C <br>
-                            <input type="radio" name="" id=""> Pilihan D <br>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-header">
-                        Soal 1
-                    </div>
-                    <div class="card-body">
-                        <form action="">
-                            <input type="radio" name="" id=""> Pilihan A <br>
-                            <input type="radio" name="" id=""> Pilihan B <br>
-                            <input type="radio" name="" id=""> Pilihan C <br>
-                            <input type="radio" name="" id=""> Pilihan D <br>
-                        </form>
-                    </div>
-                </div>
-                
             </div>
         </div>
+        <div class="col-md-8">
+            <h1>Soal</h1>
+            <form action="{{action('QuizController@submitQuiz')}}" method="POST" id="quizform">
+                @csrf
+                @for ($j = 0; $j<count($questions); $j++)
+
+                <div id="question-list">
+                    <div class="card" class="question-div" name="question[{{$questions[$j]['id']}}]">
+                        <div class="card-header">
+                            {{$j+1}}
+                        </div>
+                        <div class="card-body">
+                            <input type="radio" name="{{$questions[$j]['id']}}" id="" value="option1" onclick="setColorPalette({{$j}})"> {{$questions[$j]['option1']}} <br />
+                            <input type="radio" name="{{$questions[$j]['id']}}" id="" value="option2" onclick="setColorPalette({{$j}})"> {{$questions[$j]['option2']}} <br />
+                            <input type="radio" name="{{$questions[$j]['id']}}" id="" value="option3" onclick="setColorPalette({{$j}})"> {{$questions[$j]['option3']}} <br />
+                            <input type="radio" name="{{$questions[$j]['id']}}" id="" value="option4" onclick="setColorPalette({{$j}})"> {{$questions[$j]['option4']}} <br />
+                        </div>
+                    </div>
+                </div>
+                @endfor
+                <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+            </form>
+
+
+        </div>
     </div>
+</div>
+
+<script>
+    var VISIBLE_ELEMENT = $("#question-list .question-div:visible");
+    var ANSWERED        = ' answered';
+    var NOT_ANSWERED    = ' not-answered';
+    var ANSWER_MARKED   = ' marked';
+    var NOT_VISITED     = ' not-visited';        
+    var MINUTES         = 0;
+    var SECONDS         = 0;
+    var MAX_SECONDS     = 5;
+    var CALL_TIME       = 0;
+
+    $(document).ready(function() {
+        $("#question-list .card").slice(0,10).show();
+        // $("li.pal.pal-el span").slice(0,10).css("background-color", "green");
+        
+
+        $("#question-list .card").slice(10,20).hide();
+        // $("li.pal.pal-el span").slice(11,20).css("background-color", "white");
+
+        $("button.btn-prev").hide();
+        $("button.btn-submit").hide();
+
+        mins = {{$menit}}
+        seconds = {{$detik}}
+
+        initWaktu(mins, seconds);
+
+        console.log("Hello");
+    });
+
+    function nextClick() {
+        $("#question-list .card").slice(0,10).hide();
+        // $("li.pal.pal-el span").slice(0,10).css("background-color", "white");
+
+        $("#question-list .card").slice(10,20).show();
+        // $("li.pal.pal-el span").slice(10,20).css("background-color", "green");
+    
+        $("button.btn-prev").show();
+        $("button.btn-next").hide();
+        $("button.btn-submit").show();
+    }
+
+    function prevClick() {
+        $("#question-list .card").slice(0,10).show();
+        // $("li.pal.pal-el span").slice(0,10).css("background-color", "green");
+        
+
+        $("#question-list .card").slice(10,20).hide();
+        // $("li.pal.pal-el span").slice(10,20).css("background-color", "white");
+
+        $("button.btn-prev").hide();
+        $("button.btn-next").show();
+        $("button.btn-submit").hide();
+    }
+
+    function showSpecificQuestion(index) {
+        $(VISIBLE_ELEMENT).hide();
+        $("#question-list .question-div:eq("+index+")").fadeIn();
+
+        return false;
+    }
+
+    function setColorPalette(index) {
+        $("li.pal.pal-el span").slice(index, index+1).css("background-color", "yellow");
+        // console.log('index :', index);
+    }
+
+    function initWaktu(mins, sec) {
+        MINUTES = mins;
+        SECONDS = sec;
+
+        startInterval();
+
+    }
+
+    function startInterval() {
+        timer = setInterval("tictac()", 1000);
+    }
+
+    function stopInterval() {
+        clearInterval(timer);
+    }
+
+    function checkTimer() {
+        if(MAX_SECONDS == CALL_TIME) {
+            CALL_TIME = 0;
+        }
+        else
+            CALL_TIME++;
+    }
+
+    function tictac() {
+        SECONDS--;
+        checkTimer();
+        if(SECONDS <= 0) {
+            MINUTES--;
+            $("#mins").text(MINUTES);
+
+            if(MINUTES < 0) {
+                stopInterval();
+                $("#mins").text('0');
+                alert("Waktu telah habis. Jawaban akan tersubmit secara otomatis.");
+                $('#quizform').submit();
+            }
+            SECONDS = 59;
+        }
+
+        if(MINUTES >= 0) {
+            $("#seconds").text(SECONDS);
+        } else {
+            $("#seconds").text("00");
+        }
+    }
+
+
+</script>
 @endsection
