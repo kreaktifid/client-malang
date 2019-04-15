@@ -11,16 +11,39 @@
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous"></script>
    <script src="semantic/dist/semantic.min.js"></script>
+	 <style>
+			.dropdown-item {
+				background-color: Transparent;
+				background-repeat:no-repeat;
+				border: none;
+				color: white;
+				padding-top: 15px;
+			}
+	 </style>
 	<title>Teks Ekposisi</title>
 </head>
 <body>
-		<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse">
 		  <div class="container-fluid">
 		    <div class="navbar-header">
-		      <a class="navbar-brand" href="#">Beranda</a>
-		    </div>
+            <a class="navbar-brand" href="{{route('text.eksposisi')}}">Beranda</a>
+          </div>
+          <ul class="nav navbar-nav navbar-right" style="float:right;">
+               
+               @if(Auth::user())
+               <!-- <li><a href="{{route('logout')}}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li> -->
+               <li>
+                  <form action="{{route('logout')}}" method="POST">
+                        @csrf
+                        <button class="dropdown-item" style="cursor:pointer">Logout</button>
+                  </form>
+               </li>
+               @else
+               <li><a href="{{route('login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+               @endif
+          </ul>
 		  </div>
-		</nav>
+	</nav>
 
 	<section id="navigator" style="margin-top: 30px;">
 		<div class="container-fluid" style="text-align: center;width: 90%;">

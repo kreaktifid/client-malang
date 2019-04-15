@@ -4,7 +4,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Auth::routes();
 Route::get('/text/eksposisi', 'EksposisiController@index')->name('text.eksposisi');
 
