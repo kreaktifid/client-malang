@@ -36,7 +36,7 @@
             <div class="result">
                 <h3><span>{{$point}}/100</span></h3>
             </div>
-            <a href="" class="btn btn-success">Kembali</a>
+            <a href="{{url('/')}}" class="btn btn-success">Kembali</a>
         </div>
     </div>
 </div>
