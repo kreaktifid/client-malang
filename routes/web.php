@@ -20,7 +20,8 @@ Route::resource('submissions', 'SubmissionController');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::get('/edit-profile', 'ProfileController@edit')->name('profile.edit');
 
-Route::get('/question', 'QuizController@startQuiz')->name('quiz.question');
+Route::get('/question', 'QuizController@startQuiz')->name('quiz.question')->middleware('auth');
+Route::get('/test', 'QuizController@test')->middleware('auth');
 
 Route::get('/result', function() {
     return view('quiz.result');

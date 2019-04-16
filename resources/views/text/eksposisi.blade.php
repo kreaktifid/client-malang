@@ -57,7 +57,7 @@
             	Kembali
          		</button>
 						<li class="ui blue left floated icon button">
-							<a href="{{route('login')}}" style="color:white;">Mulai Test</a> 
+							<a href="{{url('test')}}" style="color:white;">Mulai Test</a> 
          		</li>	
 					</div>	
 				</div>			

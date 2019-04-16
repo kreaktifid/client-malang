@@ -34,4 +34,8 @@ class QuizController extends Controller
 
         return view('quiz.question', $data);
     }
+
+    public function test() {
+        return view('quiz.test');
+    }
 }
